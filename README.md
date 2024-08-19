@@ -1,4 +1,4 @@
-# GitHub Repo Downloader
+# Repo2JSON
 [English](https://github.com/leezhuuuuu/Repo2JSON/blob/main/README_EN.md) | [中文](https://github.com/leezhuuuuu/Repo2JSON/blob/main/README.md)
 
 [![](https://img.shields.io/github/license/leezhuuuuu/Repo2JSON.svg)](LICENSE)
@@ -7,7 +7,7 @@
 
 ## 概述
 
-GitHub Repo Downloader 是一个基于 Flask 的轻量级 API 服务，旨在根据可配置的约束条件（如深度、文件数量和文件大小限制）从 GitHub 仓库中获取和下载文件。该工具非常适合需要快速高效地提取仓库特定部分而不必克隆整个仓库的开发者。
+Repo2JSON 是一个基于 Flask 的轻量级 API 服务，旨在根据可配置的约束条件（如深度、文件数量和文件大小限制）从 GitHub 仓库中获取和下载文件。该工具非常适合需要快速高效地提取仓库特定部分而不必克隆整个仓库的开发者。
 
 ## 功能
 
@@ -16,6 +16,8 @@ GitHub Repo Downloader 是一个基于 Flask 的轻量级 API 服务，旨在根
 - **文件大小限制**：忽略超过指定字符数的文件。
 - **许可证排除**：可选地从下载中排除 LICENSE 文件。
 - **速率限制处理**：自动处理 GitHub API 的速率限制，并提供何时重试的反馈。
+- **二进制文件排除**：确保只下载文本文件，排除所有二进制文件。
+- **硬编码令牌支持**：如果请求中未提供令牌，可以使用硬编码的 GitHub API 令牌。
 
 ## 技术栈
 
@@ -36,8 +38,8 @@ GitHub Repo Downloader 是一个基于 Flask 的轻量级 API 服务，旨在根
 
 1. 克隆仓库：
    ```bash
-   git clone https://github.com/yourusername/github-repo-downloader.git
-   cd github-repo-downloader
+   git clone https://github.com/leezhuuuuu/Repo2JSON.git
+   cd Repo2JSON
    ```
 
 2. 安装所需包：
@@ -66,6 +68,7 @@ GitHub Repo Downloader 是一个基于 Flask 的轻量级 API 服务，旨在根
 - `MAX_FILES_PER_DIR`：在跳过目录之前允许的最大文件数量。
 - `ENABLE_FILE_SIZE_LIMIT`：启用或禁用文件大小限制。
 - `MAX_FILE_SIZE`：在跳过文件之前允许的最大字符数。
+- `HARDCODED_TOKEN`：硬编码的 GitHub API 令牌，用于在请求中未提供令牌时使用。
 
 ## API 端点
 
@@ -118,7 +121,7 @@ API 在失败情况下（如无效请求、速率限制超限或内部服务器�
 
 ## 作者
 
-- [Your Name](https://github.com/yourusername)
+- [Lee Zhu](https://github.com/leezhuuuuu)
 
 ## 致谢
 
