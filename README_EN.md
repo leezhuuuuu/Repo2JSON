@@ -132,3 +132,8 @@ This project is licensed under the GNU License. See the [LICENSE](LICENSE) file 
 - [Flask](https://flask.palletsprojects.com/)
 - [Requests](https://docs.python-requests.org/)
 - GitHub API
+
+
+## GitHub Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=leezhuuuuu/Repo2JSON&type=Date)](https://star-history.com/#leezhuuuuu/Repo2JSON&Date)
