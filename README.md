@@ -7,7 +7,7 @@
 
 ## 概述
 
-Repo2JSON 是一个基于 Flask 的轻量级 API 服务，旨在根据可配置的约束条件（如深度、文件数量和文件大小限制）从 GitHub 仓库中获取和下载文件。该工具非常适合需要快速高效地提取仓库特定部分而不必克隆整个仓库的开发者。
+Repo2JSON 是一个基于 Flask 的轻量级 API 服务，旨在将 GitHub 仓库的源代码转换为适合大型语言模型（LLM）理解的 JSON 格式。通过可配置的约束条件（如深度、文件数量和文件大小限制），该工具能够高效地提取仓库的特定部分，而无需克隆整个仓库。Repo2JSON 非常适合需要快速提取和处理代码库内容的开发者。
 
 ## 功能
 
@@ -70,11 +70,15 @@ Repo2JSON 是一个基于 Flask 的轻量级 API 服务，旨在根据可配置�
 - `MAX_FILE_SIZE`：在跳过文件之前允许的最大字符数。
 - `HARDCODED_TOKEN`：硬编码的 GitHub API 令牌，用于在请求中未提供令牌时使用。
 
+## 获取 GitHub Token
+
+要获取 GitHub Token，请访问 [GitHub Tokens Settings](https://github.com/settings/tokens) 并生成一个新的个人访问令牌。确保为令牌选择 `repo` 权限，以便能够访问私有仓库和执行仓库相关的操作。
+
 ## API 端点
 
-### `POST /download`
+### `POST /repo2json`
 
-下载指定 GitHub 仓库的内容。需要在请求体中提供 `repo_url`，并在 Authorization 头中提供 Bearer 令牌。
+下载指定 GitHub 仓库的内容，并将其转换为适合 LLM 理解的 JSON 格式。需要在请求体中提供 `repo_url`，并在 Authorization 头中提供 Bearer 令牌。
 
 #### 请求体
 
@@ -117,7 +121,7 @@ API 在失败情况下（如无效请求、速率限制超限或内部服务器�
 
 ## 许可证
 
-本项目基于 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
+本项目基于 GNU 许可证。详见 [LICENSE](LICENSE) 文件。
 
 ## 作者
 
