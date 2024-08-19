@@ -1,5 +1,4 @@
- # GitHub Repo Downloader
-
+# Repo2JSON
 [English](https://github.com/leezhuuuuu/Repo2JSON/blob/main/README_EN.md) | [中文](https://github.com/leezhuuuuu/Repo2JSON/blob/main/README.md)
 
 [![](https://img.shields.io/github/license/leezhuuuuu/Repo2JSON.svg)](LICENSE)
@@ -8,45 +7,47 @@
 
 ## Overview
 
-The GitHub Repo Downloader is a lightweight Flask-based API service designed to fetch and download files from a GitHub repository, adhering to configurable constraints such as depth, file count, and file size limits. This tool is ideal for developers who need a quick and efficient way to extract specific parts of a repository without cloning the entire repo.
+Repo2JSON is a lightweight API service based on Flask, designed to convert GitHub repository source code into JSON format suitable for Large Language Models (LLM). With configurable constraints such as depth, file count, and file size limits, this tool efficiently extracts specific parts of the repository without cloning the entire repository. Repo2JSON is perfect for developers who need to quickly extract and process repository content.
 
 ## Features
 
-- **Depth Limitation**: Control the depth of directory traversal up to a specified maximum.
-- **File Count Limitation**: Skip directories that exceed a predefined number of files.
-- **File Size Limitation**: Ignore files that exceed a specified character count.
-- **License Exclusion**: Optionally exclude the LICENSE file from the download.
+- **Depth Limit**: Controls the depth of directory traversal up to a specified maximum depth.
+- **File Count Limit**: Skips directories that exceed a predefined number of files.
+- **File Size Limit**: Ignores files that exceed a specified number of characters.
+- **License Exclusion**: Optionally excludes LICENSE files from the download.
 - **Rate Limit Handling**: Automatically handles GitHub API rate limits and provides feedback on when to retry.
+- **Binary File Exclusion**: Ensures only text files are downloaded, excluding all binary files.
+- **Hardcoded Token Support**: Uses a hardcoded GitHub API token if no token is provided in the request.
 
 ## Tech Stack
 
 - **Backend Framework**: [Flask](https://flask.palletsprojects.com/)
 - **HTTP Requests**: [Requests](https://docs.python-requests.org/)
-- **Proxying**: Utilizes HTTP/HTTPS proxies if configured via environment variables.
+- **Proxy**: Uses HTTP/HTTPS proxy if configured via environment variable.
 
-## Setup & Installation
+## Installation and Setup
 
 ### Prerequisites
 
 - Python 3.x
 - Flask
 - Requests
-- An environment variable `HTTP_PROXY` if you need to use a proxy for HTTP/HTTPS requests.
+- If using HTTP/HTTPS proxy, set the `HTTP_PROXY` environment variable.
 
 ### Installation
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/github-repo-downloader.git
-   cd github-repo-downloader
+   git clone https://github.com/leezhuuuuu/Repo2JSON.git
+   cd Repo2JSON
    ```
 
-2. Install the required packages:
+2. Install required packages:
    ```bash
    pip install -r requirements.txt
    ```
 
-3. Set up your environment variables if using a proxy:
+3. If using a proxy, set the environment variable:
    ```bash
    export HTTP_PROXY="http://your-proxy-url:port"
    ```
@@ -58,21 +59,26 @@ The GitHub Repo Downloader is a lightweight Flask-based API service designed to 
 
 ## Configuration
 
-The application uses several configurable parameters to control its behavior:
+The application uses multiple configurable parameters to control its behavior:
 
-- `EXCLUDE_LICENSE`: Set to `True` to skip the LICENSE file.
-- `ENABLE_DEPTH_LIMIT`: Enable or disable depth limitation.
-- `MAX_DEPTH`: Maximum depth for directory traversal.
-- `ENABLE_FILE_COUNT_LIMIT`: Enable or disable file count limitation per directory.
-- `MAX_FILES_PER_DIR`: Maximum number of files allowed in a directory before skipping it.
-- `ENABLE_FILE_SIZE_LIMIT`: Enable or disable file size limitation.
-- `MAX_FILE_SIZE`: Maximum character count for a file before skipping it.
+- `EXCLUDE_LICENSE`: Set to `True` to skip LICENSE files.
+- `ENABLE_DEPTH_LIMIT`: Enable or disable depth limit.
+- `MAX_DEPTH`: Maximum depth of directory traversal.
+- `ENABLE_FILE_COUNT_LIMIT`: Enable or disable file count limit per directory.
+- `MAX_FILES_PER_DIR`: Maximum number of files allowed before skipping a directory.
+- `ENABLE_FILE_SIZE_LIMIT`: Enable or disable file size limit.
+- `MAX_FILE_SIZE`: Maximum number of characters allowed before skipping a file.
+- `HARDCODED_TOKEN`: Hardcoded GitHub API token to use if no token is provided in the request.
 
-## API Endpoints
+## Getting GitHub Token
 
-### `POST /download`
+To get a GitHub Token, visit [GitHub Tokens Settings](https://github.com/settings/tokens) and generate a new personal access token. Ensure you select `repo` permissions for the token to access private repositories and perform repository-related operations.
 
-Downloads the contents of a specified GitHub repository. Requires the `repo_url` in the request body and a Bearer token in the Authorization header.
+## API Endpoint
+
+### `POST /repo2json`
+
+Downloads the content of a specified GitHub repository and converts it into JSON format suitable for LLM understanding. Requires `repo_url` in the request body and a Bearer token in the Authorization header.
 
 #### Request Body
 
@@ -90,7 +96,7 @@ Authorization: Bearer <your_github_token>
 
 #### Response
 
-Returns a JSON object containing the file tree structure and the contents of the files that meet the specified criteria.
+Returns a JSON object containing the file tree structure and file contents that meet the specified conditions.
 
 ```json
 {
@@ -107,19 +113,19 @@ Returns a JSON object containing the file tree structure and the contents of the
 
 ## Error Handling
 
-The API returns appropriate HTTP status codes and error messages in case of failures such as invalid requests, rate limit exceedance, or internal server errors.
+The API returns appropriate HTTP status codes and error messages in case of failures such as invalid requests, rate limit exceeded, or internal server errors.
 
-## Contributing
+## Contribution
 
-Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss any improvements or features you'd like to see.
+Contributions are welcome! Please feel free to submit pull requests or open issues to discuss any improvements or new features.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU License. See the [LICENSE](LICENSE) file for details.
 
 ## Author
 
-- [Your Name](https://github.com/yourusername)
+- [Lee Zhu](https://github.com/leezhuuuuu)
 
 ## Acknowledgments
 
