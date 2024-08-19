@@ -4,7 +4,7 @@
 [![](https://img.shields.io/github/license/leezhuuuuu/Repo2JSON.svg)](LICENSE)
 ![](https://img.shields.io/github/stars/leezhuuuuu/Repo2JSON.svg)
 ![](https://img.shields.io/github/forks/leezhuuuuu/Repo2JSON.svg)
-![](https://img.shields.io/docker/pulls/leezhuuuuu/Repo2JSON.svg)
+
 ## 概述
 
 GitHub Repo Downloader 是一个基于 Flask 的轻量级 API 服务，旨在根据可配置的约束条件（如深度、文件数量和文件大小限制）从 GitHub 仓库中获取和下载文件。该工具非常适合需要快速高效地提取仓库特定部分而不必克隆整个仓库的开发者。
