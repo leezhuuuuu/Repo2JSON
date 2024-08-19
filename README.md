@@ -132,3 +132,8 @@ API 在失败情况下（如无效请求、速率限制超限或内部服务器�
 - [Flask](https://flask.palletsprojects.com/)
 - [Requests](https://docs.python-requests.org/)
 - GitHub API
+
+
+## GitHub Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=leezhuuuuu/Repo2JSON&type=Date)](https://star-history.com/#leezhuuuuu/Repo2JSON&Date)
