@@ -9,9 +9,10 @@ EXCLUDE_LICENSE = True  # 默认不读取LICENSE文件
 ENABLE_DEPTH_LIMIT = True  # 是否启用深度限制
 MAX_DEPTH = 2  # 读取文件夹的最大深度
 ENABLE_FILE_COUNT_LIMIT = True  # 是否启用文件数量限制
-MAX_FILES_PER_DIR = 50  # 当任何一个文件夹中超过数量时，不读取这个文件夹
+MAX_FILES_PER_DIR = 20  # 当任何一个文件夹中超过数量时，不读取这个文件夹
 ENABLE_FILE_SIZE_LIMIT = True  # 是否启用文件字符数量限制
 MAX_FILE_SIZE = 20000  # 当某个文件的字符数量时，不进行输出
+HARDCODED_TOKEN = "your_hardcoded_token"  # 硬编码的token
 
 def get_proxy():
     proxy = os.getenv('HTTP_PROXY')
@@ -97,11 +98,14 @@ def download_repo():
     owner = parts[-2]
     repo = parts[-1]
 
-    # Get token from Authorization header
+    # Get token from Authorization header or use hardcoded token
     token = request.headers.get('Authorization')
-    if not token or not token.startswith('Bearer '):
-        return jsonify({"error": "Missing or invalid Authorization header"}), 400
-    token = token.split('Bearer ')[1]
+    if token and token.startswith('Bearer '):
+        token = token.split('Bearer ')[1]
+    elif HARDCODED_TOKEN:
+        token = HARDCODED_TOKEN
+    else:
+        return jsonify({"error": "Missing or invalid Authorization header and no hardcoded token"}), 400
 
     try:
         file_tree = build_file_tree(owner, repo, token=token)
