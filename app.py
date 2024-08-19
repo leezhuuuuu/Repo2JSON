@@ -86,8 +86,8 @@ def download_files(owner, repo, path='', token=None, depth=0):
             result[item['path']] = download_files(owner, repo, item['path'], token, depth + 1)
     return result
 
-@app.route('/download', methods=['POST'])
-def download_repo():
+@app.route('/repo2json', methods=['POST'])
+def repo2json():
     data = request.json
     repo_url = data.get('repo_url')
     if not repo_url:
