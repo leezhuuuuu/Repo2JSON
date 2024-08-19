@@ -1,4 +1,4 @@
-# GitHub Repo Downloader (中文版)
+# GitHub Repo Downloader
 
 ## 概述
 
